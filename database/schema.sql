@@ -2,14 +2,16 @@ CREATE TABLE IF NOT EXISTS student(
     student_id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100),
     gender VARCHAR(1),
-    age INTEGER
+    age INTEGER,
+    pw TEXT
 );
 
 CREATE TABLE IF NOT EXISTS teacher (
     teacher_id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100),
     gender VARCHAR(1),
-    age INTEGER
+    age INTEGER,
+    pw TEXT
 );
 
 CREATE TABLE IF NOT EXISTS class(

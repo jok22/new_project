@@ -68,8 +68,9 @@ class Interface:
         student_name = input("DIGITE O NOME DO ALUNO: \n")
         student_gender = input("DIGITE O GÊNERO DO ALUNO: \n")
         student_age = int(input("DIGITE A IDADE DO ALUNO: \n"))
+        student_pw = input("DIGITE A SENHA DO ALUNO: \n")
         try: 
-          self.student.insert_student(student_name, student_gender, student_age)
+          self.student.insert_student(student_name, student_gender, student_age, student_pw)
         except Exception as e:
           print(f"ERROR: {str(e)}")
       if var == 2:
@@ -119,8 +120,9 @@ class Interface:
         teacher_name = input("DIGITE O NOME DO PROFESSOR: \n")
         teacher_gender= input("DIGITE O GÊNERO DO PROFESSOR: \n")
         teacher_age = int(input("DIGITE A IDADE DO PROFESSOR: \n"))
+        teacher_pw = input("DIGITE A SENHA DO PROFESSOR: \n")
         try: 
-          self.teacher.insert_teacher(teacher_name, teacher_gender, teacher_age)
+          self.teacher.insert_teacher(teacher_name, teacher_gender, teacher_age, teacher_pw)
         except Exception as e:
           print(f"ERROR: {str(e)}")
           bool_ = 0
@@ -226,4 +228,9 @@ class Interface:
       if var == 5:
         self.main_menu() 
       if var == 6:
-        sys.exit() 
+        sys.exit()
+
+    def return_enrollments(self):
+        return self.enrollment.get-enrollments_info() 
+
+        

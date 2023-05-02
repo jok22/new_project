@@ -34,7 +34,7 @@ class StudentRepository(Database):
     """
     A repository for managing students in a database.
     """
-    def insert_student(self, name: str, gender: str, age: int) -> None:
+    def insert_student(self, name: str, gender: str, age: int, pw: str) -> None:
         """
         Insert a new student record into the database.
         Args:
@@ -45,7 +45,7 @@ class StudentRepository(Database):
         - None
         """
         with self as cursor:
-            cursor.execute("INSERT INTO student (name, gender, age) VALUES (?, ?, ?)", (name, gender, age))
+            cursor.execute("INSERT INTO student (name, gender, age, pw) VALUES (?, ?, ?, ?)", (name, gender, age, pw))
 
     def delete_student(self, student_id: int) -> None:
         """
@@ -59,18 +59,6 @@ class StudentRepository(Database):
             cursor.execute("DELETE FROM student WHERE student_id = ?", (student_id,))
             cursor.execute("DELETE FROM enrollments WHERE student_id = ?", (student_id,))
 
-    def update_student(self, student_id: int, new_name: str) -> None:
-        """
-        Update the name of a student record in the database.
-        Args:
-        - student_id (int): The ID of the student to update.
-        - new_name (str): The new name for the student.
-        Returns:
-        - None
-        """
-        with self as cursor:
-            cursor.execute("UPDATE student SET name=? WHERE student_id=?", (new_name, student_id))
-
     def read_single_student(self, student_id: int) -> list:
         """
         Get a list of a single student and their ID from the database.
@@ -82,7 +70,7 @@ class StudentRepository(Database):
         - A list containing the student's ID, name, gender, and age.
         """
         with self as cursor:
-            cursor.execute("SELECT student_id, name, gender, age FROM student WHERE student_id=?", (student_id,))
+            cursor.execute("SELECT student_id, name, gender, age, pw FROM student WHERE student_id=?", (student_id,))
             return cursor.fetchone()
         
     def read_student(self) -> list:
@@ -93,7 +81,7 @@ class StudentRepository(Database):
         - list: A list of (student_id, name, gender, age) tuples for all students in the database.
         """
         with self as cursor:
-            cursor.execute("SELECT student_id, name, gender, age FROM student")
+            cursor.execute("SELECT student_id, name, gender, age, pw FROM student")
             return cursor.fetchall()
 
 
@@ -101,7 +89,7 @@ class TeacherRepository(Database):
     """
     A repository for managing teachers in a database.
     """
-    def insert_teacher(self, name: str, gender: str, age: int) -> None:
+    def insert_teacher(self, name: str, gender: str, age: int, pw: str) -> None:
         """
         Insert a new teacher record into the database.
         Args:
@@ -112,7 +100,7 @@ class TeacherRepository(Database):
         - None
         """
         with self as cursor:
-            cursor.execute("INSERT INTO teacher (name, gender, age) VALUES (?, ?, ?)", (name, gender, age))
+            cursor.execute("INSERT INTO teacher (name, gender, age, pw) VALUES (?, ?, ?, ?)", (name, gender, age, pw))
 
     def delete_teacher(self, teacher_id: int) -> None:
         """
@@ -126,18 +114,6 @@ class TeacherRepository(Database):
             cursor.execute("DELETE FROM teacher WHERE teacher_id = ?", (teacher_id,))
             cursor.execute("DELETE FROM enrollments WHERE teacher_id =?", (teacher_id,))
 
-    def update_teacher(self, teacher_id: int, new_name: str) -> None:
-        """
-        Update the name of a teacher record in the database.
-        Args:
-        - teacher_id (int): The ID of the teacher to update.
-        - new_name (str): The new name of the teacher.
-        Returns:
-        - None
-        """
-        with self as cursor:
-            cursor.execute("UPDATE teacher set name=? WHERE teacher_id = ?", (new_name, teacher_id))
-
     def read_single_teacher(self, teacher_id: int) -> list:
         """
         Get a list of a single teacher and their ID from the database.
@@ -149,7 +125,7 @@ class TeacherRepository(Database):
         - A list containing the teacher's ID, name, gender, and age.
         """
         with self as cursor:
-            cursor.execute("SELECT teacher_id, name, gender, age FROM teacher WHERE teacher_id=?", (teacher_id,))
+            cursor.execute("SELECT teacher_id, name, gender, age, pw FROM teacher WHERE teacher_id=?", (teacher_id,))
             return cursor.fetchone()
 
     def read_teacher(self) -> list:
@@ -160,7 +136,7 @@ class TeacherRepository(Database):
         - list: A list of (teacher_id, name, gender, age) tuples for all teachers in the database.
         """
         with self as cursor:
-            cursor.execute("SELECT teacher_id, name, gender, age FROM teacher")
+            cursor.execute("SELECT teacher_id, name, gender, age, pw FROM teacher")
             return cursor.fetchall()
 
 
